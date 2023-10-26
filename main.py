@@ -42,9 +42,14 @@ def openai_endpoint():
         else:
             print(f'Failed to get response, status code: {response.status_code}')
         return jsonify({'response': response_json})
+
+    except requests.exceptions.RequestException as e:  # This will catch any Requests-related exceptions
+        print(f'Request error: {e}')
+        traceback.print_exc()  # This will print the traceback
+
     except Exception as e:
-        print('An error occurred: %s', e)  # Log exceptions with stack trace
-        return jsonify({'error': str(e)}), 500
+        print(f'An error occurred: {e}')
+        traceback.print_exc()  #
 
 
 if __name__ == '__main__':
