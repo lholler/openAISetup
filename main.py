@@ -34,7 +34,7 @@ def openai_endpoint():
         openai.api_key=openai_api_key
         #response = requests.post(url=completions_endpoint, headers=headers, json=data)
         response = openai.ChatCompletion.create(model=data["model"], messages=[{'role': 'system',
-                                                                                'content': "Fix all grammar errors"},
+                                                                                'content': "You are an OCD therapist. Give the user an ERP technique"},
 
                                                                                {'role': 'user', 'content': 'I am afraid I hit spmeone w my car'}])
         print("aftr response")
