@@ -3,6 +3,8 @@ from flask import Flask, request, jsonify
 import os
 import logging
 
+from werkzeug.debug import console
+
 # Configure logging
 
 app = Flask(__name__)
@@ -10,7 +12,7 @@ app = Flask(__name__)
 @app.route('/openai', methods=['POST'])
 def openai_endpoint():
     data = request.get_json()
-    logging.log(msg="Received data: %s', data", level=1)  # Log the received data
+    console.log("Received data: %s', data")  # Log the received data
 
 
 
