@@ -29,7 +29,10 @@ def openai_endpoint():
         }
 
         openai.api_key=openai_api_key
-        response = openai.ChatCompletion.request(data, headers=headers)
+        response = openai.ChatCompletion.create(model="gpt-3.5-turbo-instruct",
+  prompt="Say this is a test",
+  max_tokens=7,
+  temperature=0)
     #    response = requests.post(completions_endpoint, headers=headers, json=data)
 
         # To handle the response
