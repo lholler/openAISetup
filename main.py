@@ -44,7 +44,7 @@ def openai_endpoint():
         if response.status_code == 200:
             response_json = response.json()
         else:
-            console.log((f'Failed to get response, status code: {response.status_code}')
+            console.log((f'Failed to get response, status code: {response.status_code}'))
         return jsonify({'response': response_json})
     except Exception as e:
         logging.exception('An error occurred: %s', e)  # Log exceptions with stack trace
