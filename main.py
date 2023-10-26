@@ -3,7 +3,7 @@ import openai
 import os
 
 app = Flask(__name__)
-openai_api_key = os.getenv('openai')  # Get your OpenAI API key from an environment variable
+openai_api_key = os.environ.get('openai')  # Get your OpenAI API key from an environment variable
 
 @app.route('/openai', methods=['POST'])
 def openai_endpoint():
