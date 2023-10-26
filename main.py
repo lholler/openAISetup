@@ -24,7 +24,7 @@ def openai_endpoint():
     openai.api_key = "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"
 
     try:
-        response = openai.Completion.create(
+        response = openai.ChatCompletion.create(
             engine=model, prompt=prompt, max_tokens=max_tokens, temperature=temperature)
         generated_text = response['choices'][0]['text'].strip()
         logging.info('Generated text: %s', generated_text)  # Log the generated text
