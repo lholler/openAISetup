@@ -4,6 +4,8 @@ import openai
 import os
 import logging
 
+from werkzeug.debug import console
+
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
@@ -12,7 +14,7 @@ app = Flask(__name__)
 @app.route('/openai', methods=['POST'])
 def openai_endpoint():
     data = request.get_json()
-    logging.info('Received data: %s', data)  # Log the received data
+    console.log('Received data: %s', data)  # Log the received data
 
     # Extract necessary data from the request
     prompt = data.get('prompt')
@@ -20,9 +22,11 @@ def openai_endpoint():
     max_tokens = data.get('maxTokens', 1000)
     temperature = data.get('temperature', 1)
 
-    logging.info('Using model: %s, max_tokens: %d, temperature: %.1f', model, max_tokens, temperature)  # Log the extracted values
+    console.log(('Using model: %s, max_tokens: %d, temperature: %.1f', model, max_tokens, temperature))  # Log the extracted values
 
     openai_api_key = os.getenv('openai')
+
+    console.log("Key: "+openai_api_key)
 
     try:
 
@@ -40,7 +44,7 @@ def openai_endpoint():
         if response.status_code == 200:
             response_json = response.json()
         else:
-            print(f'Failed to get response, status code: {response.status_code}')
+            console.log((f'Failed to get response, status code: {response.status_code}')
         return jsonify({'response': response_json})
     except Exception as e:
         logging.exception('An error occurred: %s', e)  # Log exceptions with stack trace
