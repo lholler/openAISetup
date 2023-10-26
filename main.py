@@ -41,9 +41,9 @@ def openai_endpoint():
         print("aftr response")
         print(str(response))
         # To handle the response
-        response_json = response.json()
 
-        return jsonify({'response': response_json})
+
+        return jsonify({'response': response})
 
     except requests.exceptions.RequestException as e:  # This will catch any Requests-related exceptions
         print(f'Request error: {e}')
