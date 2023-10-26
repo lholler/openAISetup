@@ -41,7 +41,7 @@ def openai_endpoint():
             response_json = response.json()
         else:
             print(f'Failed to get response, status code: {response.status_code}')
-        return jsonify({'response': generated_text})
+        return jsonify({'response': response_json})
     except Exception as e:
         logging.exception('An error occurred: %s', e)  # Log exceptions with stack trace
         return jsonify({'error': str(e)}), 500
