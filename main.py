@@ -39,8 +39,7 @@ def openai_endpoint():
     {"role": "user", "content": "Hello!"}
   ])
         print("aftr response")
-        print(f'Response: {response.text}')
-
+        print(str(response))
         # To handle the response
         if response.status_code == 200:
             response_json = response.json()
