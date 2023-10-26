@@ -32,7 +32,7 @@ def openai_endpoint():
         }
         print("after here")
 
-        response = requests.post(url=completions_endpoint, headers=headers, json=data)
+        response = requests.post(url=completions_endpoint, headers=headers, data=data)
         print("aftr response")
         print(f'Response: {response.text}')
 
