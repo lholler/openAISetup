@@ -32,7 +32,7 @@ def openai_endpoint():
         }
         print("after here")
 
-        response = requests.post(url=completions_endpoint, headers=headers, data=data)
+        response = requests.post(url=completions_endpoint, headers=headers, json=data)
         print("aftr response")
         print(f'Response: {response.text}')
 
@@ -47,10 +47,18 @@ def openai_endpoint():
         print(f'Request error: {e}')
         traceback.print_exc()  # This will print the traceback
 
+    except requests.exceptions.RequestException as e:  # This will catch any Requests-related exceptions
+        logging.error(f'Request error: {e}')
+        traceback.print_exc()  # This will print the traceback
+
+    except Exception as e:
+        logging.error(f'An error occurred: {e}')
+        traceback.print_exc()  # This will print the traceback
+
     except Exception as e:
         print(f'An error occurred: {e}')
         traceback.print_exc()  #
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=5000, debug=True)  # Enable debug mode
