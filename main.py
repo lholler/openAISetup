@@ -33,7 +33,7 @@ def openai_endpoint():
         print("after here")
         openai.api_key=openai_api_key
         #response = requests.post(url=completions_endpoint, headers=headers, json=data)
-        response = openai.ChatCompletion.create(model="gpt-3.5-turbo",
+        response = openai.ChatCompletion.create(model=data["model"],
   messages=[
     {"role": "system", "content": "You are a helpful assistant."},
     {"role": "user", "content": "Hello!"}
