@@ -15,7 +15,7 @@ app = Flask(__name__)
 @app.route('/openai', methods=['POST'])
 def openai_endpoint():
     data = request.get_json()
-    print("Received data: " + str(data))  # Log the received data
+    print("Received data: " + str(data["messages"]))  # Log the received data
     print(type(data["messages"]))
     openai_api_key = os.getenv('openai')
 
@@ -32,8 +32,8 @@ def openai_endpoint():
         }
         print("after here")
         openai.api_key=openai_api_key
-        response = requests.post(url=completions_endpoint, headers=headers, json=data)
-        #response = openai.ChatCompletion.create(model=data["model"], messages=data["messages"])
+        #response = requests.post(url=completions_endpoint, headers=headers, json=data)
+        response = openai.ChatCompletion.create(model=data["model"], messages=data["messages"])
         print("aftr response")
         print(str(response))
         # To handle the response
