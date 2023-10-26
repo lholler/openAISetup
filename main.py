@@ -1,3 +1,4 @@
+import requests
 from flask import Flask, request, jsonify
 import openai
 import os
@@ -21,12 +22,25 @@ def openai_endpoint():
 
     logging.info('Using model: %s, max_tokens: %d, temperature: %.1f', model, max_tokens, temperature)  # Log the extracted values
 
-    openai.api_key = os.getenv('openai')
+    openai_api_key = os.getenv('openai')
 
     try:
-        response = openai.ChatCompletion.create(data)
-        generated_text = response['choices'][0]['text'].strip()
-        logging.info('Generated text: %s', generated_text)  # Log the generated text
+
+        completions_endpoint = 'https://api.openai.com/v1/chat/completions'
+
+        headers = {
+            'Content-Type': 'application/json',
+            'Authorization': f'Bearer {openai_api_key}',
+        }
+
+
+        response = requests.post(completions_endpoint, headers=headers, json=data)
+
+        # To handle the response
+        if response.status_code == 200:
+            response_json = response.json()
+        else:
+            print(f'Failed to get response, status code: {response.status_code}')
         return jsonify({'response': generated_text})
     except Exception as e:
         logging.exception('An error occurred: %s', e)  # Log exceptions with stack trace
