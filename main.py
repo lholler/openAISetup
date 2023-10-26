@@ -21,11 +21,10 @@ def openai_endpoint():
 
     logging.info('Using model: %s, max_tokens: %d, temperature: %.1f', model, max_tokens, temperature)  # Log the extracted values
 
-    openai.api_key = "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"
+    openai.api_key = os.getenv('openai')
 
     try:
-        response = openai.ChatCompletion.create(
-            engine=model, prompt=prompt, max_tokens=max_tokens, temperature=temperature)
+        response = openai.ChatCompletion.create(data)
         generated_text = response['choices'][0]['text'].strip()
         logging.info('Generated text: %s', generated_text)  # Log the generated text
         return jsonify({'response': generated_text})
