@@ -16,7 +16,6 @@ app = Flask(__name__)
 def openai_endpoint():
     data = request.get_json()
     print("Received data: " + str(data["messages"]))  # Log the received data
-    print("Type: "+type(data["messages"]))
     openai_api_key = os.getenv('openai')
 
     print("Key: " + openai_api_key)
