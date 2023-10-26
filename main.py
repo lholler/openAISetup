@@ -21,7 +21,7 @@ def openai_endpoint():
 
     logging.info('Using model: %s, max_tokens: %d, temperature: %.1f', model, max_tokens, temperature)  # Log the extracted values
 
-    openai.api_key = os.getenv('openai')
+    openai.api_key = "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"
 
     try:
         response = openai.Completion.create(
