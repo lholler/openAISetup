@@ -17,7 +17,7 @@ def openai_endpoint():
 
     openai.api_key = openai_api_key
     try:
-        response = openai.Completion.create(engine=model, prompt=prompt, max_tokens=max_tokens, temperature=temperature)
+        response = openai.ChatCompletion.create(engine=model, prompt=prompt, max_tokens=max_tokens, temperature=temperature)
         return jsonify(response['choices'][0]['text'].strip())
     except Exception as e:
         return jsonify({'error': str(e)}), 500
