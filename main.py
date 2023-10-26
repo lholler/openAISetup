@@ -33,7 +33,34 @@ def openai_endpoint():
         print("after here")
         openai.api_key=openai_api_key
         #response = requests.post(url=completions_endpoint, headers=headers, json=data)
-        response = openai.ChatCompletion.create(model=data["model"], functions=[data["function_call"]], messages=[
+        response = openai.ChatCompletion.create(model=data["model"],
+                                                functions=
+                                                [
+                                                    {
+                                                        "name": "get_compulsions",
+                                                        "description": "Get possible compulsions and it's description + tips based on the user input",
+                                                        "parameters": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "compulsionName": {
+                                                                    "type": "string",
+                                                                    "description": "The name of the possible compulsion, e.g. Compulsive Handwashing",
+                                                                },
+                                                                "compulsionDescription": {
+                                                                    "type": "string",
+                                                                    "description": "The description of the compulsion",
+                                                                },
+                                                                "compulsionTips": {
+                                                                    "type": "string",
+                                                                    "description": "Based on the user's entry, generate 3-5 compulsions the user may be giving into.",
+                                                                }
+                                                            },
+                                                            "required": ["compulsionName", "ompulsionDescription",
+                                                                         "compulsionTips"],
+                                                        },
+                                                    }
+                                                ],
+                                                messages=[
                                                                                {'role': 'user', 'content': 'I am afraid I hit spmeone w my car'}])
         print("aftr response")
         print(str(response))
