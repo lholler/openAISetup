@@ -10,16 +10,15 @@ from werkzeug.debug import console
 
 app = Flask(__name__)
 
+
 @app.route('/openai', methods=['POST'])
 def openai_endpoint():
     data = request.get_json()
-    print("Received data: "+str(data))  # Log the received data
-
-
+    print("Received data: " + str(data))  # Log the received data
 
     openai_api_key = os.getenv('openai')
 
-    print("Key: "+openai_api_key)
+    print("Key: " + openai_api_key)
 
     try:
 
@@ -30,9 +29,8 @@ def openai_endpoint():
             'Authorization': f'Bearer {openai_api_key}',
         }
 
-        openai.api_key=openai_api_key
-        response = openai.ChatCompletion.create(model=data["model"],messages=data["messages"])
-       # response = requests.post(completions_endpoint, headers=headers, json=data)
+        response = requests.post(url=completions_endpoint, headers=headers, json=data)
+        print(f'Response: {response.text}')
 
         # To handle the response
         if response.status_code == 200:
@@ -43,6 +41,7 @@ def openai_endpoint():
     except Exception as e:
         print('An error occurred: %s', e)  # Log exceptions with stack trace
         return jsonify({'error': str(e)}), 500
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
