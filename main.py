@@ -11,13 +11,13 @@ app = Flask(__name__)
 @app.route('/openai', methods=['POST'])
 def openai_endpoint():
     data = request.get_json()
-    logging('Received data: %s', data)  # Log the received data
+    logging.log('Received data: %s', data)  # Log the received data
 
 
 
     openai_api_key = os.getenv('openai')
 
-    logging("Key: "+openai_api_key)
+    logging.log("Key: "+openai_api_key)
 
     try:
 
@@ -35,7 +35,7 @@ def openai_endpoint():
         if response.status_code == 200:
             response_json = response.json()
         else:
-            logging((f'Failed to get response, status code: {response.status_code}'))
+            logging.log((f'Failed to get response, status code: {response.status_code}'))
         return jsonify({'response': response_json})
     except Exception as e:
         logging.exception('An error occurred: %s', e)  # Log exceptions with stack trace
