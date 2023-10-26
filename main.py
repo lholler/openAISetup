@@ -1,9 +1,7 @@
 import requests
 from flask import Flask, request, jsonify
-import openai
 import os
 import logging
-
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
