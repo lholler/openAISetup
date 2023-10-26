@@ -4,7 +4,6 @@ import openai
 import os
 import logging
 
-from werkzeug.debug import console
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -14,19 +13,13 @@ app = Flask(__name__)
 @app.route('/openai', methods=['POST'])
 def openai_endpoint():
     data = request.get_json()
-    console.log('Received data: %s', data)  # Log the received data
+    logging('Received data: %s', data)  # Log the received data
 
-    # Extract necessary data from the request
-    prompt = data.get('prompt')
-    model = data.get('model', 'gpt-3.5-turbo')
-    max_tokens = data.get('maxTokens', 1000)
-    temperature = data.get('temperature', 1)
 
-    console.log(('Using model: %s, max_tokens: %d, temperature: %.1f', model, max_tokens, temperature))  # Log the extracted values
 
     openai_api_key = os.getenv('openai')
 
-    console.log("Key: "+openai_api_key)
+    logging("Key: "+openai_api_key)
 
     try:
 
