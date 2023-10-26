@@ -1,3 +1,4 @@
+import openai
 import requests
 from flask import Flask, request, jsonify
 import os
@@ -29,8 +30,9 @@ def openai_endpoint():
             'Authorization': f'Bearer {openai_api_key}',
         }
 
-
-        response = requests.post(completions_endpoint, headers=headers, json=data)
+        openai.api_key=openai_api_key
+        response = openai.ChatCompletion.create(model=data["model"],messages=data["messages"])
+       # response = requests.post(completions_endpoint, headers=headers, json=data)
 
         # To handle the response
         if response.status_code == 200:
