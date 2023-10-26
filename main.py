@@ -12,7 +12,7 @@ app = Flask(__name__)
 @app.route('/openai', methods=['POST'])
 def openai_endpoint():
     data = request.get_json()
-    app.logger.info("Received data: %s', data")  # Log the received data
+    print("Received data: %s', data")  # Log the received data
 
 
 
