@@ -41,10 +41,8 @@ def openai_endpoint():
         print("aftr response")
         print(str(response))
         # To handle the response
-        if response.status_code == 200:
-            response_json = response.json()
-        else:
-            print(f'Failed to get response, status code: {response.status_code}')
+        response_json = response.json()
+
         return jsonify({'response': response_json})
 
     except requests.exceptions.RequestException as e:  # This will catch any Requests-related exceptions
