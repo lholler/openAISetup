@@ -2,6 +2,7 @@ import openai
 import requests
 from flask import Flask, request, jsonify
 import os
+import traceback
 import logging
 
 from werkzeug.debug import console
@@ -23,11 +24,13 @@ def openai_endpoint():
     try:
 
         completions_endpoint = 'https://api.openai.com/v1/chat/completions'
+        print('Here')
 
         headers = {
             'Content-Type': 'application/json',
             'Authorization': f'Bearer {openai_api_key}',
         }
+        print("after here")
 
         response = requests.post(url=completions_endpoint, headers=headers, json=data)
         print(f'Response: {response.text}')
